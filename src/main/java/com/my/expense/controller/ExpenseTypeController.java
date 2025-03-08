@@ -43,6 +43,7 @@ public class ExpenseTypeController {
             ExpenseType updatedExpenseType = expenseType.get();
             updatedExpenseType.setName(expenseTypeDetails.getName());
             updatedExpenseType.setDescription(expenseTypeDetails.getDescription());
+            updatedExpenseType.setRegistrationRequired(expenseTypeDetails.isRegistrationRequired());
             updatedExpenseType.setStatus(expenseTypeDetails.getStatus());
             updatedExpenseType.setCreatedBy(expenseTypeDetails.getCreatedBy());
             updatedExpenseType.setUpdatedBy(expenseTypeDetails.getUpdatedBy());
