@@ -7,4 +7,6 @@
 
     <include file="db/changelog/1_create_expense_type_table.sql"/>
     <include file="db/changelog/2_insert_expense_type_data.sql"/>
+    <include file="db/changelog/3_users_and_roles_table.sql"/>
+    <include file="db/changelog/4_insert_users_and_roles_data.sql"/>
 </databaseChangeLog>

@@ -4,6 +4,7 @@ import com.my.expense.entity.ExpenseType;
 import com.my.expense.service.ExpenseTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,22 +22,26 @@ public class ExpenseTypeController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     public List<ExpenseType> getAllExpenseTypes() {
         return expenseTypeService.findAll();
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public ResponseEntity<ExpenseType> getExpenseTypeById(@PathVariable Long id) {
         Optional<ExpenseType> expenseType = expenseTypeService.findById(id);
         return expenseType.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ExpenseType createExpenseType(@RequestBody ExpenseType expenseType) {
         return expenseTypeService.save(expenseType);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ExpenseType> updateExpenseType(@PathVariable Long id, @RequestBody ExpenseType expenseTypeDetails) {
         Optional<ExpenseType> expenseType = expenseTypeService.findById(id);
         if (expenseType.isPresent()) {
@@ -56,6 +61,7 @@ public class ExpenseTypeController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteExpenseType(@PathVariable Long id) {
         if (expenseTypeService.findById(id).isPresent()) {
             expenseTypeService.deleteById(id);
