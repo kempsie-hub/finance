@@ -27,8 +27,10 @@ public class ExpenseTypeController {
         return expenseTypeService.findAll();
     }
 
+
+    @CrossOrigin("*")
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     public ResponseEntity<ExpenseType> getExpenseTypeById(@PathVariable Long id) {
         Optional<ExpenseType> expenseType = expenseTypeService.findById(id);
         return expenseType.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
@@ -41,7 +43,7 @@ public class ExpenseTypeController {
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity<ExpenseType> updateExpenseType(@PathVariable Long id, @RequestBody ExpenseType expenseTypeDetails) {
         Optional<ExpenseType> expenseType = expenseTypeService.findById(id);
         if (expenseType.isPresent()) {
