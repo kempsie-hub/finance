@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/expense-types")
 public class ExpenseTypeController {
@@ -42,6 +43,7 @@ public class ExpenseTypeController {
         return expenseTypeService.save(expenseType);
     }
 
+    @CrossOrigin("*")
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity<ExpenseType> updateExpenseType(@PathVariable Long id, @RequestBody ExpenseType expenseTypeDetails) {

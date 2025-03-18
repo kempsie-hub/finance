@@ -9,4 +9,6 @@
     <include file="db/changelog/2_insert_expense_type_data.sql"/>
     <include file="db/changelog/3_users_and_roles_table.sql"/>
     <include file="db/changelog/4_insert_users_and_roles_data.sql"/>
+    <include file="db/changelog/5_create_user_expense_type_ids.sql"/>
+    <include file="db/changelog/6_create_expense_table.sql"/>
 </databaseChangeLog>
