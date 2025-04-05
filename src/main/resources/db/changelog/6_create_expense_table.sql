@@ -9,6 +9,7 @@ CREATE TABLE user_expense (
     description VARCHAR(255),
     expense_type_subscription_id VARCHAR(100),
     amount NUMERIC(20,2),
+    expense_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     created_by VARCHAR(50),
     updated_by VARCHAR(50),
     created_date TIMESTAMP,

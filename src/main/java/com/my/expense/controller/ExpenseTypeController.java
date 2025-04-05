@@ -64,8 +64,10 @@ public class ExpenseTypeController {
         }
     }
 
+    @CrossOrigin("*")
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('USER')")
     public ResponseEntity<Void> deleteExpenseType(@PathVariable Long id) {
         if (expenseTypeService.findById(id).isPresent()) {
             expenseTypeService.deleteById(id);

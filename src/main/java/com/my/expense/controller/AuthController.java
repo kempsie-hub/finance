@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/v1/auth")
 @AllArgsConstructor
+@CrossOrigin("*")
 public class AuthController {
     private AuthService registrationService;
 
@@ -18,6 +19,7 @@ public class AuthController {
         return ResponseEntity.ok(registrationService.registerUser(registerDTO));
     }
 
+    @CrossOrigin("*")
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO) {
         return ResponseEntity.ok(registrationService.loginUser(loginDTO));

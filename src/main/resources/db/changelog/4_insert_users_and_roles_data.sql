@@ -1,7 +1,7 @@
 --changeset kempegowdafs:8  (this is the changeset that inserts data into the tables)
 INSERT INTO users (email, username, name, password) VALUES
 ('kempegowdanagaraj14@gmail.com', 'kempegowda',
-    'Kempegowda', '$2a$10$sChM5TQUXRr5g.ywpRlBgOKwQ9Noximibk4CXoHIU/DE2mqq0nNxa');
+    'Kempegowda', '$2a$10$MyjBSYE9dzjrmtz43Fn3se23.8Iq4F6iSL31etBnJNpX47mAv5yra');
 
 --changeset kempegowdafs:9
 INSERT INTO ROLES (name) VALUES ('USER');
