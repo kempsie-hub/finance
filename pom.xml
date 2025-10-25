@@ -11,9 +11,11 @@
 	<groupId>com.my</groupId>
 	<artifactId>finance</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>expense</name>
+	<name>finance</name>
 	<description>Demo project for Spring Boot</description>
-
+	<properties>
+		<lombok.version>1.18.38</lombok.version>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -46,7 +48,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.38</version>
+			<version>${lombok.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -69,5 +71,24 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+	<!-- ensure annotation processing is enabled for Maven builds -->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>${lombok.version}</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>
