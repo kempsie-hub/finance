@@ -1,8 +1,10 @@
 package com.my.expense.controller;
 
+import com.my.expense.dto.ExpenseTypeDTO;
 import com.my.expense.entity.ExpenseType;
 import com.my.expense.service.ExpenseTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,12 +34,13 @@ public class ExpenseTypeController {
     }
 
     @PostMapping
-    public ExpenseType createExpenseType(@RequestBody ExpenseType expenseType) {
-        return expenseTypeService.save(expenseType);
+    public ResponseEntity<ExpenseTypeDTO> createExpenseType(@RequestBody ExpenseType expenseType, @RequestParam String application) {
+        return new ResponseEntity<>(expenseTypeService.save(expenseType, application), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ExpenseType> updateExpenseType(@PathVariable Long id, @RequestBody ExpenseType expenseTypeDetails) {
+    public ResponseEntity<ExpenseTypeDTO> updateExpenseType(@PathVariable Long id, @RequestBody ExpenseType expenseTypeDetails,
+                                                            @RequestParam String application) {
         Optional<ExpenseType> expenseType = expenseTypeService.findById(id);
         if (expenseType.isPresent()) {
             ExpenseType updatedExpenseType = expenseType.get();
@@ -48,7 +51,7 @@ public class ExpenseTypeController {
             updatedExpenseType.setUpdatedBy(expenseTypeDetails.getUpdatedBy());
             updatedExpenseType.setCreatedDate(expenseTypeDetails.getCreatedDate());
             updatedExpenseType.setUpdatedDate(expenseTypeDetails.getUpdatedDate());
-            return ResponseEntity.ok(expenseTypeService.save(updatedExpenseType));
+            return ResponseEntity.ok(expenseTypeService.save(updatedExpenseType, application));
         } else {
             return ResponseEntity.notFound().build();
         }
