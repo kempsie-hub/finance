@@ -6,6 +6,7 @@ import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.my.expense.enums.FinanceAction;
@@ -25,6 +26,7 @@ public class SmsServiceImpl implements SmsService {
     }
 
     @Override
+    @Async
     public void sendSms(FinanceAction action, String expenseType) {
         Message message = Message.creator(
                 new com.twilio.type.PhoneNumber("+916364175505"),
