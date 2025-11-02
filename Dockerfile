@@ -4,14 +4,11 @@ FROM maven:3.9.4-eclipse-temurin-17 AS builder
 WORKDIR /workspace
 
 # Use the maven wrapper if present for reproducible builds
-COPY mvnw .
-COPY .mvn .mvn
+# use the maven binary from the base image instead of the wrapper
 COPY pom.xml .
-RUN chmod +x mvnw || true
-
-# Copy source and build
 COPY src ./src
-RUN ./mvnw -B -DskipTests package
+RUN mvn -B -DskipTests package
+
 
 # Runtime stage: lightweight JRE
 FROM eclipse-temurin:17-jre AS runtime
